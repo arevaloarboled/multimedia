@@ -37,7 +37,8 @@ connection.onmessage = function(message) {
         case "offer":
             if (confirm("Llamada entrante de "+data.name) == true) {
                 onOffer(data.offer, data.name);
-                angular.element(document.getElementById('MAIN')).scope().en_llamada();                
+                angular.element(document.getElementById('MAIN')).scope().en_llamada();
+                angular.element(document.getElementById('MAIN')).scope().user_con="En llamada con "+data.name;
             }else{
               onOffer(data.offer, data.name);
               send({
@@ -93,6 +94,7 @@ function send(message) {
 
   function MenuCtrl($scope, $q, $mdSidenav, $mdMedia, LinksService, $window, $http, $mdDialog, $mdToast) {
     $scope.random=false;
+    $scope.user_con="";
     $scope.contactos=[];
     $scope.tags;
     $scope.id=getCookie("id");
@@ -141,7 +143,8 @@ function send(message) {
               console.log(data);
         },(function (data) {
             console.log('error');
-        }));        
+        }));  
+        $scope.user_con="";      
       };
 
       $scope.rechazada = function(){        
@@ -264,7 +267,7 @@ function send(message) {
         $scope.openLeftMenu();                   
       };
 
-      if($scope.id!=undefined){      
+      if(getCookie("id")!=undefined || $scope.id!=undefined){      
         $scope.logout();
       }
 
@@ -294,6 +297,7 @@ function send(message) {
               }));                          
       }
       $scope.llamar = function(user){
+        $scope.user_con="En llamada con "+user;
         var theirUsername = user;
         if (theirUsername.length > 0) {
             startPeerConnection(theirUsername);
@@ -357,7 +361,8 @@ function send(message) {
               console.log(data);
         },(function (data) {
             console.log('error');
-        }));        
+        }));
+        $scope.user_con="";
       }
 
       $scope.en_random = function(){
@@ -384,7 +389,8 @@ function send(message) {
                     var theirUsername = rand_user;
                     if (theirUsername.length > 0) {
                         startPeerConnection(theirUsername);
-                    }                    
+                    }                   
+                    $scope.user_con="En llamada con "+rand_user; 
                     $scope.en_llamada();
                 }                
           },(function (data) {
