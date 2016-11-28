@@ -1,0 +1,22 @@
+.loginBox {
+  max-width:  90%;
+  width: 500px
+}
+
+.stretch input  {
+  width: 100%
+}
+
+.md-default-theme md-ink-bar, md-tabs md-ink-bar {
+  color: #33f;
+  background: #33f;
+  height: 4px;
+}
+
+md-tabs.md-default-theme .md-tab.md-active, md-tabs .md-tab.md-active, md-tabs.md-default-theme .md-tab.md-active md-icon, md-tabs .md-tab.md-active md-icon, md-tabs.md-default-theme .md-tab.md-focused, md-tabs .md-tab.md-focused, md-tabs.md-default-theme .md-tab.md-focused md-icon, md-tabs .md-tab.md-focused md-icon #Administrar_tab {
+  color: #fff;
+}
+
+md-tabs.md-default-theme .md-tab, md-tabs .md-tab{
+  color: #fff;
+}

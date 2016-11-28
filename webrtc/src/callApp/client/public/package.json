@@ -1,0 +1,24 @@
+{
+  "name": "epe",
+  "version": "1.0.0",
+  "private": true,
+  "description": "epe",
+  "scripts": {
+    "bower": "bower install",
+    "start": "grunt"
+  },
+  "author": "Camilo Arevalo <arevaloarboled@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "bower": "^1.7.9",
+    "grunt": "^0.4.5",
+    "grunt-contrib-connect": "^0.8.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-express-server": "^0.5.3"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "rethinkdbdash": "^2.3.21"
+  }
+}

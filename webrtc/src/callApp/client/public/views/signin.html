@@ -1,0 +1,21 @@
+<div layout="column" layout-align="center center" layout-fill="layout-fill">
+  <div layout="column" class="loginBox md-whiteframe-12dp">
+    <md-toolbar md-colors="{background: 'grey-900'}">
+      <h2 class="md-toolbar-tools"><span>Bienvenido!</span></h2>
+    </md-toolbar>
+    <md-content layout="column" class="md-padding">
+      <md-input-container>
+        <label>Nombre de usuario</label>
+        <input type="text" ng-model="usuario" name="usuario" required/>
+      </md-input-container>
+      <md-button class="md-raised md-primary" ng-click="ver_user()">Verificar usuario disponible</md-button>
+      <md-input-container>
+        <label>Contraseña</label>
+        <input type="password" ng-model="pass" name="pass" required/>
+      </md-input-container>      
+      <div layout="row" layout-align="end center" style="padding-top:20px;">
+        <md-button class="md-raised md-primary" type="submit" name="submit" ng-click="send_signin()">Enviar</md-button>
+      </div>
+    </md-content>
+  </div>
+</div>

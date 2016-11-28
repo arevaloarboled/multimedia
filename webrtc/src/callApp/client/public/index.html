@@ -1,0 +1,252 @@
+<!doctype html>
+<html ng-app="webApp">
+<head>
+  <meta charset="utf-8">
+  <title>Video call app</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="bower_components/angular-material/angular-material.min.css"  media="screen,projection"/>
+  <link rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.min.css" />
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/panel.css">
+  <link rel="stylesheet" href="css/tags.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+
+  
+
+</head>
+<body id="MAIN" layout="row" ng-controller="MenuCtrl">
+
+  <!--<md-sidenav md-colors="{background: 'indigo-800'}"  layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="getMinRes()" ng-if="id!=undefined">
+          
+    <md-toolbar md-colors="{background: 'grey-900'}" >
+      <div class="md-toolbar-tools">
+  
+        <md-button class="md-icon-button" aria-label="Side Panel" ng-click="openLeftMenu()" ng-show="!getMinRes()">
+          <!--<md-tooltip>Close</md-tooltip>-->
+          <!--
+          <md-icon ng-show="!getMinRes()">close</md-icon>
+        </md-button>  
+        <h2 class="md-toolbar-tools">{{user}}</h2>
+      </div>  
+    </md-toolbar>
+
+    <md-list>
+      <md-list-item ng-click="openLeftMenu()" href="#/principal" layout="row">
+        <i class="material-icons" flex="25">home</i>
+        <span class="md-body-1" flex><h4 style="text-align:center">Principal</h4></span>
+      </md-list-item>
+      <md-list-item ng-if="lvl==2" ng-click="openLeftMenu()" href="#/administrar">
+        <i class="material-icons" flex="25">settings</i>
+        <span class="md-body-1" flex><h4 style="text-align:center">Administrar</h4></span>
+      </md-list-item>
+      <md-list-item ng-if="lvl==2" ng-click="openLeftMenu()" href="#/turnos">
+        <i class="material-icons" flex="25">schedule</i>
+        <span class="md-body-1" flex><h4 style="text-align:center">Turnos</h4></span>
+      </md-list-item>
+      <md-list-item ng-if="lvl==2" ng-click="openLeftMenu()" href="#/faltas">
+        <i class="material-icons" flex="25">error_outline</i>
+        <span class="md-body-1" flex><h4 style="text-align:center">Faltas</h4></span>
+      </md-list-item>
+      <md-list-item ng-if="lvl==2" ng-click="openLeftMenu()" href="#/perfil">
+        <i class="material-icons" flex="25">perm_identity</i>
+        <span class="md-body-1" flex><h4 style="text-align:center">Perfil</h4></span>
+      </md-list-item>
+      <md-list-item ng-click="logout()">
+        <i class="material-icons" flex="25">power_settings_new</i>
+        <span class="md-body-1" flex><h4 style="text-align:center">Desconexión</h4></span>
+      </md-list-item>
+    </md-list>
+  </md-sidenav>-->
+
+  <style>
+    video {
+        background: black;
+        border: 1px solid gray;
+    }
+    
+    .page {
+        position: relative;
+        display: block;
+        margin: 0 auto;
+        width: 500px;
+        height: 500px;
+    }
+    
+    #yours {
+        width: 150px;
+        height: 150px;
+        position: absolute;
+        top: 15px;
+        right: 15px;
+    }
+    
+    #theirs {
+        width: 500px;
+        height: 500px;
+
+    }
+
+    .signin_page{
+      display: none;
+    }
+</style>
+
+
+  <div layout="column" class="relative" layout-fill role="main">      
+    <md-toolbar md-colors="{background: 'grey-900'}" >
+      <div class="md-toolbar-tools">
+        
+        <!--<md-button class="md-icon-button" aria-label="Side Panel" ng-click="openLeftMenu()" ng-show="!getMinRes()">          
+          <md-icon class="md-default-theme" class="material-icons" ng-show="!getMinRes()">menu</md-icon>
+        </md-button>-->
+                        
+        <div ng-if="id!=undefined" layout="row" layout-align="start center">
+          <div ng-click="logout()">
+            <i class="material-icons" flex="25">power_settings_new</i>            
+          </div>          
+          <span flex></span>
+          <div><h2>{{user}}</h2></div>                    
+        </div> 
+        <span flex></span>       
+        <div layout="row" layout-align="end center">
+          <div><h2>Video call super aspera!</h2></div>
+          <div><img src="img/videocall.png" weight="50" height="50"></div>          
+        </div>
+        <!--<span class="md-body-1"><h2>Empacando para estudiar</h2> <img src="img/epe_img-ico.png" weight="50" height="50"> </span>-->
+      </div>
+    </md-toolbar>
+
+    <md-content flex md-scroll-y style="background: #ddd">
+
+      <div layout="column" layout-align="center center" layout-fill="layout-fill">
+        <!---->
+        <div layout="column" class="loginBox md-whiteframe-12dp" id="login-page">
+          <md-toolbar md-colors="{background: 'grey-900'}">
+            <h2 class="md-toolbar-tools"><span>Bienvenido!</span></h2>
+          </md-toolbar>
+          <md-content layout="column" class="md-padding">
+            <md-input-container>
+              <label>Usuario</label>
+              <input type="text" id="username" ng-model="usuario" required/>
+            </md-input-container>
+            <md-input-container>
+              <label>Contraseña</label>
+              <input type="password" ng-model="pass" required/>
+            </md-input-container>
+            <div layout="row" layout-align="center center" style="padding-top:20px;">
+              <md-button class="md-raised md-primary" id="login" type="submit" ng-click="send_login()">Ingresar</md-button>
+              <div flex="flex"></div>
+              <md-button onclick="document.querySelector('#login-page').style.display = 'none';  document.querySelector('#signin-page').style.display = 'flex';" md-no-ink="md-no-ink">Crear cuenta</md-button>
+            </div>
+          </md-content>
+        </div>
+
+        <div layout="row" id="call-page">
+          <div flex="30">
+            <div layout="column">
+              <div flex>                
+                  <h1>Contactos</h1>
+                  <md-button class="md-raised md-primary md-fab" ng-click="agregar()">
+                    <md-icon>add</md-icon>
+                  </md-button>
+                  <md-button class="md-raised md-primary md-fab" ng-click="search()">
+                    <md-icon>loop</md-icon>
+                  </md-button>
+                  <md-button class="md-raised md-accent md-fab" ng-click="en_random()">
+                    <md-icon>shuffle</md-icon>
+                  </md-button>
+                  <md-card layout="column" class="md-whiteframe-8dp" ng-repeat="contacto in contactos">
+                    <md-card-title>
+                      <div layout="row" flex="30">                        
+                        <i ng-if="contacto.online==1" class="material-icons">person</i>
+                        <i ng-if="contacto.online==0" class="material-icons">person_outline</i>
+                      </div>
+                      <div layout="row" flex>
+                        <md-card-title-text>
+                          <span class="md-headline">{{contacto.user}}</span>                          
+                        </md-card-title-text>
+                      </div>
+                    </md-card-title>
+                    <md-card-actions layout="row">                        
+                        <md-button md-no-ink ng-click="llamar(contacto.user)" class="md-raised md-primary">Llamar</md-button>
+                        <md-button class="md-warn" ng-click="eliminar(contacto.idusuarios)" class="md-raised md-warn">Eliminar</md-button>
+                    </md-card-actions>
+                  </md-card>                  
+              </div>              
+          </div>
+          </div>
+          <div flex>
+            <h2 ng-if="random">En random!</h2>
+            <div id="call-page" class="page" layout="column">              
+              <div flex>
+                <video id="yours" autoplay></video>
+                <video id="theirs" autoplay></video>      
+              <div>
+              <div layout-align="center center">
+                <md-button aria-label="done" class="md-raised md-warn" ng-click="colgar()">
+                  <md-icon class="material-icons">call_end</md-icon>
+                </md-button>
+              </div>
+            </div>
+          </div>
+        </div></div></div>
+
+        <div layout="column" layout-align="center center" class="signin_page" layout-fill="layout-fill" id="signin-page">
+          <div layout="column" class="loginBox md-whiteframe-12dp">
+            <md-toolbar md-colors="{background: 'grey-900'}">
+              <h2 class="md-toolbar-tools"><span>Bienvenido!</span></h2>
+            </md-toolbar>
+            <md-content layout="column" class="md-padding">
+              <md-input-container>
+                <label>Nombre de usuario</label>
+                <input type="text" ng-model="usuario" name="usuario" required/>
+              </md-input-container>
+              <md-button class="md-raised md-primary" ng-click="ver_user()">Verificar usuario disponible</md-button>
+              <md-input-container>
+                <label>Contraseña</label>
+                <input type="password" ng-model="pass" name="pass" required/>
+              </md-input-container>      
+              <div layout="row" layout-align="end center" style="padding-top:20px;">
+                <md-button class="md-raised md-primary" type="submit" name="submit" ng-click="send_signin()">Enviar</md-button>
+              </div>
+            </md-content>
+          </div>
+        </div>
+        <!---->
+      </div>
+      <!--<ui-view layout="column" layout-fill layout-padding>-->
+        <!--<div ng-view></div>-->
+      <!--</ui-view>-->
+    </md-content>
+
+  </div>
+
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/angular-aria/angular-aria.min.js"></script>
+  <script src="bower_components/angular-material/angular-material.min.js"></script>
+  <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+  <script src="bower_components/angular-touch/angular-touch.js"></script>
+  <script src="bower_components/underscore/underscore-min.js"></script>
+  <script type="text/javascript" src="bower_components/ng-tags-input/ng-tags-input.min.js"></script>
+  
+  <script src="js/app.js"></script>
+  <script src="js/controllers/main.js"></script>
+  <script src="js/controllers/menu.js"></script>
+  <script src="js/services/linksService.js"></script>
+  <script src="js/services/pollingService.js"></script>
+  <script src="js/filters/http.js"></script>
+  <script src="js/filters/tags.js"></script>
+  <script src="js/filters/searchFor.js"></script>
+  <!--<script src="client.js"></script>-->
+  <script src="js/controllers.js"></script>  
+  <script src="stream.js"></script>
+</body>
+</html>

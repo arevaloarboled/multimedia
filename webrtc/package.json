@@ -1,0 +1,32 @@
+{
+  "name": "webrtc",
+  "version": "1.0.0",
+  "description": "webRTC Examples",
+  "readme": "README.md",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "static": "node_modules/.bin/static",
+    "wscat": "node_modules/.bin/wscat -c ws://localhost:8888",
+    "callApp": "cd src/callApp/client/ && node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/jhvm/webrtc.git"
+  },
+  "keywords": [
+    "webRTC",
+    "sockets"
+  ],
+  "author": "Jorge Victoria <jhvm.puj@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://bitbucket.org/jhvm/webrtc#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "node-static": "^0.7.7",
+    "ws": "^0.8.0",
+    "wscat": "^1.0.1"
+  }
+}
