@@ -13,7 +13,7 @@ callPage.style.display = "none";
 
 var name,
     connectedUser;
-var connection = new WebSocket('wss://192.168.0.18:8888');
+var connection = new WebSocket('wss://192.250.0.38:8888');
 
 connection.onopen = function() {
     console.log("Connected");

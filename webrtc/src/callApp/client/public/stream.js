@@ -6,7 +6,7 @@ function startConnection() {
     if (hasUserMedia()) {
         navigator.getUserMedia({
             video: true,
-            audio: false
+            audio: true
         }, function(myStream) {
             stream = myStream;
             yourVideo.src = window.URL.createObjectURL(stream);
